@@ -1,7 +1,9 @@
 package com.Organizer.Snacky.Controllers;
 
-import DbEnteiies.Card;
-import Services.CardServiceImplementation;
+import com.Organizer.Snacky.DbEnteiies.Card;
+import com.Organizer.Snacky.Services.CardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,16 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class TestController {
 
+    @Qualifier("cardServiceImplementation")
+    @Autowired
+    private CardService service;
+
 
     @RequestMapping(value = "/greeting", method = RequestMethod.GET)
     public String greeting() {
-        return "hui sosi gyboi traci";
+        return "hello";
     }
 
     @RequestMapping(value = "/addCard", method = RequestMethod.GET)
     public String addCard(String id, String text) {
-        CardServiceImplementation service = new CardServiceImplementation();
-        service.addCard(new Card("12","CARTOCHkA"));
+        service.addCard(new Card("CARTOCHkA","AuthorizedUserName"));
         return "";
     }
 

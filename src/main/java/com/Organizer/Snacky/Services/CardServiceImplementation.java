@@ -1,21 +1,20 @@
-package Services;
+package com.Organizer.Snacky.Services;
 
-import DBRepos.CardsRepository;
-import DbEnteiies.Card;
+import com.Organizer.Snacky.DBRepos.CardRepository;
+import com.Organizer.Snacky.DbEnteiies.Card;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 @Service
-@Configurable
 public class CardServiceImplementation implements CardService {
 
     @Autowired
-    private CardsRepository cardsRepository;
+    private CardRepository cardsRepository;
 
     @Override
     public Card addCard(Card card) {
-        Card savedCard = cardsRepository.saveAndFlush(card);
+       Card savedCard =   cardsRepository.saveAndFlush(card);
+
 
         return savedCard;
     }
