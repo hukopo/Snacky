@@ -31,4 +31,4 @@ build/
 .vscode/
 
 ### npm modules
-/node_modules
+/src/main/webapp/node_modules/
