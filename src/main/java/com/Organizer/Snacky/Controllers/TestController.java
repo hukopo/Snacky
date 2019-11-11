@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 class TestController {
 
-    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
+    @RequestMapping(value = "/q", method = RequestMethod.GET)
     public String greeting() {
-        return "hui sosi gyboi traci";
+        return "index";
     }
 
 }
