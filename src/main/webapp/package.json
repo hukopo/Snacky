@@ -22,13 +22,18 @@
     "react-dom": "^16.8.6",
     "reset-css": "^5.0.1",
     "style-loader": "^0.23.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.7.2",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack",
+    "lint": "tslint --project ./tsconfig.json"
   },
   "devDependencies": {
     "@types/react": "^16.9.11",

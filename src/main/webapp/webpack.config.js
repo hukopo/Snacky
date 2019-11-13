@@ -7,6 +7,19 @@ module.exports = {
     path: path.join(__dirname, "./"),
     filename: "index-bundle.js"
   },
+  devServer: {
+      port: 8081,
+      contentBase: "src/",
+      historyApiFallback: true,
+      proxy: {
+          '/': {
+              target: 'http://localhost:8080',
+              pathRewrite: {
+                  '^/': ''
+              }
+          }
+      }
+  },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"],
   },

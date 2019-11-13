@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "sourceMap": true,
+        "module": "esnext",
+        "target": "esnext",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "pretty": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "maxNodeModuleJsDepth": 5,
+        "experimentalDecorators": true,
+        "noImplicitReturns": true,
+        "suppressImplicitAnyIndexErrors": true,
+
+        "plugins": [
+            {
+                "name": "tslint-language-service",
+                "alwaysShowRuleFailuresAsWarnings": false,
+                "ignoreDefinitionFiles": true,
+                "configFile": "./tslint-webstorm-local.json",
+                "disableNoUnusedVariableRule": true,
+                "supressWhileTypeErrorsPresent": false,
+                "mockTypeScriptVersion": false
+            }
+        ]
+    },
+    "include": [
+        "./src/**/*",
+        "./typings/**/*",
+        "./stories/**/*",
+    ]
+}

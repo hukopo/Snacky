@@ -7,7 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 public class CardAddOrEditModel {
     public String title;
     public Timestamp startDate;

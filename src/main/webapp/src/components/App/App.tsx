@@ -1,13 +1,12 @@
-import React, { Component } from "react";
+import * as React from "react";
 
-import './App.less';
+import "./App.less";
+import { Board } from "../Board/Board";
 
-export class App extends Component {
+export class App extends React.Component {
     render() {
         return (
-            <div>
-                <h1>My React App!</h1>
-            </div>
+            <Board />
         );
     }
 }
