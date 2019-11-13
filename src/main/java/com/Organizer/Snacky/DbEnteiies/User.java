@@ -11,7 +11,10 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
- public User(){}
+    @Transient
+    private String passwordConfirm;
+
+    public User(){}
  public User(String userName, String hash){
     this.userName = userName;
     this.hash = hash;
@@ -35,5 +38,29 @@ public class User {
 
 
 
+    public String getUsername() {
+        return userName;
+    }
+
+    public void setUsername(String username) {
+        this.userName = username;
+    }
+
+    public String getPassword() {
+        return hash;
+    }
+
+    public void setPassword(String password) {
+        this.hash = password;
+    }
+
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
 
 }

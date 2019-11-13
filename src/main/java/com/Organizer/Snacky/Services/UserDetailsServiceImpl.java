@@ -14,21 +14,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        var user = userRepository.findAllByUserName(username);
+        var user = userRepository.findAllByUserName(username).iterator().next();
         if (user == null) throw new UsernameNotFoundException(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        //for (Role role : user.getRoles()){
-            grantedAuthorities.add(new SimpleGrantedAuthority("Admin"));
-        //}
+        grantedAuthorities.add(new SimpleGrantedAuthority("User"));
 
-        return new org.springframework.security.core.userdetails.User("userName", "pass", grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }
