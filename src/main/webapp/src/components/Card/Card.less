@@ -1,0 +1,23 @@
+@import "../../ColorSchema.less";
+
+.card {
+    background: @card-background;
+    width: 30*@base-size;
+    height: 15*@base-size;
+    margin: @base-size;
+    padding: @base-size;
+
+    .header{
+        font-size: 1.5em;
+        //text-align: center;
+        color: @default-link-color;
+    }
+
+    .tags{
+        color: @tag-color;
+
+        .add{
+            cursor: pointer;
+        }
+    }
+}

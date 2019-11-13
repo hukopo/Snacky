@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack",
+    "build": "webpack --mode production",
     "lint": "tslint --project ./tsconfig.json"
   },
   "devDependencies": {
