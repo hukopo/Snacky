@@ -23,7 +23,7 @@ public class RegistrationController {
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
 
-        return "registrationPage";
+        return "registrationPage.jsp";
     }
 
 
@@ -32,21 +32,14 @@ public class RegistrationController {
         //userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return "registrationPage.jsp";
         }
 
         userService.addUser(userForm.userName, userForm.hash);
 
         securityService.autoLogin(userForm.userName, userForm.hash);
 
-        return "redirect:/welcome";
-    }
-
-    @PostMapping("/register")
-    void register(String username, String password) {
-        //userService.addUser("userName", "pass");
-        //securityService.autoLogin(username, password);
-        securityService.autoLogin("userName", "pass");
+        return "redirect:/";
     }
 
     @GetMapping("/login")
@@ -57,11 +50,16 @@ public class RegistrationController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
-        return "loginPage";
+        return "loginPage.jsp";
     }
 
-    @GetMapping({"/", "/welcome"})
+    @GetMapping("/")
+    public String home(Model model) {
+        return "index.html";
+    }
+
+    @GetMapping("/welcome")
     public String welcome(Model model) {
-        return "welcome";
+        return "welcome.jsp";
     }
 }
