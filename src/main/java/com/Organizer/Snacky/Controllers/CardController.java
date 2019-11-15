@@ -1,6 +1,6 @@
 package com.Organizer.Snacky.Controllers;
 
-import Models.CardAddOrEditModel;
+import com.Organizer.Snacky.Models.CardAddOrEditModel;
 import com.Organizer.Snacky.DBRepos.UserRepository;
 import com.Organizer.Snacky.DbEnteiies.Card;
 import com.Organizer.Snacky.Services.CardService;
