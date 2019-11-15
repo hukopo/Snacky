@@ -5,7 +5,6 @@ import com.Organizer.Snacky.DbEnteiies.Card;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 public class CardAddOrEditModel {
     public String title;
     public String description;

@@ -1,0 +1,27 @@
+@import "../../ColorSchema.less";
+
+.board {
+    margin: auto;
+    width : 70vw;
+
+    .cards {
+        display  : flex;
+        flex-wrap: wrap;
+    }
+
+    input {
+        border-radius: 10px;
+        border       : none;
+        background   : @card-background;
+        padding      : @base-size;
+        margin       : @base-size;
+        color        : @text-color;
+
+    }
+
+    input:focus {
+        outline: none;
+        padding: @base-size - 1px;
+        border : solid 1px @tag-color;
+    }
+}

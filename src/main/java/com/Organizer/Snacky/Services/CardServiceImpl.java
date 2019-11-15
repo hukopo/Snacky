@@ -16,14 +16,14 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Card addCard(Card card) {
-       Card savedCard =   cardsRepository.saveAndFlush(card);
+        Card savedCard = cardsRepository.saveAndFlush(card);
         return savedCard;
     }
 
     @Override
     public Card getCardById(Integer id) {
-        Optional<Card> card =  cardsRepository.findById(id);
-        if (card.isEmpty()){
+        Optional<Card> card = cardsRepository.findById(id);
+        if (card.isEmpty()) {
             return null;
         }
         return card.get();
@@ -33,7 +33,6 @@ public class CardServiceImpl implements CardService {
     @Override
     public Iterable<Card> getCardsByUserId(Integer userId) {
         return cardsRepository.findAllByUserId(userId);
-
     }
 
     @Override
