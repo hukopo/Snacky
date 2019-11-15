@@ -1,6 +1,7 @@
 package com.Organizer.Snacky.DbEnteiies;
 
 import com.Organizer.Snacky.Models.CardAddOrEditModel;
+import com.Organizer.Snacky.Models.CardModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -55,5 +56,21 @@ public class Card {
         endDate = model.endDate;
     }
 
+    public CardModel toCardModel() {
+        var cardModel =  new CardModel();
+        cardModel.Description.Content = description;
+        cardModel.StartDate = startDate;
+        cardModel.EndDate = endDate;
+        cardModel.Name = title;
+        cardModel.Author.Username = user.userName;
+        for (var member: participants
+             ) {
+            cardModel.Members.add(member.toModel());
+        }
+        return cardModel;
 
+    }
 }
+
+
+

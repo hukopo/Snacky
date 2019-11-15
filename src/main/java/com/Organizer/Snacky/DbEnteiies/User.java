@@ -1,5 +1,6 @@
 package com.Organizer.Snacky.DbEnteiies;
 
+import com.Organizer.Snacky.Models.UserModel;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 
@@ -63,4 +64,9 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
+    public UserModel toModel() {
+        var userModel = new UserModel();
+        userModel.Username = userName;
+        return userModel;
+    }
 }

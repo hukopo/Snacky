@@ -1,6 +1,6 @@
-package Models;
+package com.Organizer.Snacky.Models;
 
-abstract public class Place {
+public class PlaceModel {
     public String Name;
     public Float Longitude;
     public Float Latitude;

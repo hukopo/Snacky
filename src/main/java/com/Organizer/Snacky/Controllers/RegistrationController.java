@@ -39,6 +39,7 @@ public class RegistrationController {
 
         securityService.autoLogin(userForm.userName, userForm.hash);
 
+
         return "redirect:/";
     }
 
