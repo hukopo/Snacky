@@ -1,8 +1,8 @@
 package com.Organizer.Snacky.Controllers;
 
+import com.Organizer.Snacky.DBRepos.PlaceRepository;
 import com.Organizer.Snacky.DBRepos.TagRepository;
 import com.Organizer.Snacky.DbEnteiies.Tag;
-import com.Organizer.Snacky.DbEnteiies.User;
 import com.Organizer.Snacky.DBRepos.UserRepository;
 import com.Organizer.Snacky.DbEnteiies.Card;
 import com.Organizer.Snacky.Models.CardModel;
@@ -25,6 +25,8 @@ public class CardController extends BaseController {
     private UserRepository userRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private PlaceRepository placeRepository;
 
 
     @PostMapping("/add")
@@ -39,8 +41,16 @@ public class CardController extends BaseController {
         card.user = user;
         FillMembers(cardModel, card);
         FillTags(cardModel, card);
+        FillPlace(cardModel, card);
         var added = service.addCard(card);
         return ok(added.toCardModel());
+    }
+
+    private void FillPlace(@RequestBody CardModel cardModel, Card card) {
+        var place = cardModel.place.toEntity();
+        var placeId = placeRepository.saveAndFlush(place).id;
+        card.place = place;
+        card.placeId = placeId;
     }
 
 

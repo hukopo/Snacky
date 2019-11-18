@@ -35,6 +35,8 @@ public class Card {
     public String description;
     @Column(name = "user_id", nullable = false)
     public Integer userId;
+    @Column(name = "place_id", nullable = true)
+    public Integer placeId;
     @Column(name = "start_date", nullable = true)
     public Timestamp startDate;
     @Column(name = "end_date", nullable = true)
@@ -56,6 +58,10 @@ public class Card {
     @JoinColumn(name = "user_id", nullable = false, updatable = false, insertable = false)
     public User user;
 
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER, targetEntity = Place.class)
+    @JoinColumn(name = "place_id", nullable = true, updatable = false, insertable = false)
+    public Place place;
+
     public void updateFromModel(CardModel model) {
         title = model.title;
         startDate = model.startDate;
@@ -70,6 +76,7 @@ public class Card {
         cardModel.title = title;
         cardModel.description.content = description;
         cardModel.creator.userName = user.userName;
+        cardModel.place = place.toModel();
         for (var member: members
              ) {
             cardModel.members.add(member.toModel());
