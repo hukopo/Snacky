@@ -20,15 +20,15 @@ abstract class BaseController<T> {
     }
 
     ResponseEntity<T> badRequest(T body) {
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(body, HttpStatus.BAD_REQUEST);
     }
 
     ResponseEntity<T> unauthorized(T body) {
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(body, HttpStatus.UNAUTHORIZED);
     }
 
     ResponseEntity<T> ok(T body) {
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(body, HttpStatus.OK);
     }
 
 
