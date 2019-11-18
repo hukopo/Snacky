@@ -20,6 +20,8 @@
     "less-loader": "^5.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-google-maps": "^9.4.5",
+    "react-yandex-maps": "^4.2.0",
     "reset-css": "^5.0.1",
     "style-loader": "^0.23.1",
     "tslint": "^5.20.1",

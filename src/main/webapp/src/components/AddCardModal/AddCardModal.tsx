@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Map, YMaps } from "react-yandex-maps";
 import { Button } from "../Button/Button";
 import { ModalWindow, ModalWindowProps } from "../ModalWindow/ModalWindow";
 
@@ -47,6 +48,8 @@ export class AddCardModal extends React.Component<
       method: "POST",
       body: JSON.stringify(card)
     });
+
+    this.props.close();
   };
 
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +89,7 @@ export class AddCardModal extends React.Component<
         </div>
         <div>
           <label htmlFor="tags">тэги</label>
-          <input id="tags" />
+          <input onChange={this.handleInputChange} id="tags" />
         </div>
         <div>
           <label htmlFor="place">место</label>
@@ -109,7 +112,10 @@ export class AddCardModal extends React.Component<
             id="endDate"
           />
         </div>
-
+        <YMaps>
+          <div>My awesome application with maps!</div>
+          <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
+        </YMaps>
         <Button text="Добавить карточку" onClick={this.sendCard} />
       </ModalWindow>
     );
