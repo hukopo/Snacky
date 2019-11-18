@@ -2,11 +2,9 @@ package com.Organizer.Snacky.DbEnteiies;
 
 import com.Organizer.Snacky.Models.UserModel;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,7 +30,7 @@ public class User {
     @Column(name = "hash", nullable = false)
     public String hash;
 
-   @ManyToMany(mappedBy = "participants",targetEntity = Card.class)
+   @ManyToMany(mappedBy = "members",targetEntity = Card.class)
    Set<Card> participantsCards;
    @OneToMany(mappedBy = "user")
    Set<Card> userCards;
@@ -66,7 +64,7 @@ public class User {
 
     public UserModel toModel() {
         var userModel = new UserModel();
-        userModel.Username = userName;
+        userModel.username = userName;
         return userModel;
     }
 }

@@ -4,5 +4,5 @@ public class DescriptionModel {
     public DescriptionModel() {
     }
 
-    public String Content;
+    public String content;
 }

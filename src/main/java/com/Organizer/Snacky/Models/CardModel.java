@@ -5,18 +5,20 @@ import java.util.ArrayList;
 
 public  class CardModel {
     public CardModel(){
-        Description=new DescriptionModel();
-        Place = new PlaceModel();
+        description =new DescriptionModel();
+        creator = new UserModel();
+        place = new PlaceModel();
+        members = new ArrayList<>();
     };
-    public String Name;
-    public UserModel Author;
-    public DescriptionModel Description;
-    public ArrayList<UserModel> Members;
-    public PlaceModel Place;
-    public Timestamp StartDate;
-    public Timestamp EndDate;
+    public String title;
+    public UserModel creator;
+    public DescriptionModel description;
+    public ArrayList<UserModel> members;
+    public PlaceModel place;
+    public Timestamp startDate;
+    public Timestamp endDate;
 
     public com.Organizer.Snacky.DbEnteiies.Card toCard(Integer userId) {
-        return new com.Organizer.Snacky.DbEnteiies.Card(Name, Description.Content, userId, StartDate, EndDate);
+        return new com.Organizer.Snacky.DbEnteiies.Card(title, description.content, userId, startDate, endDate);
     }
 }

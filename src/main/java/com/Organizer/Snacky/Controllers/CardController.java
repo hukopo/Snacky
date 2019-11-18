@@ -33,15 +33,19 @@ public class CardController extends BaseController {
         var userName = auth.getName();
         var user = userRepository.findByUserName(userName);
         var card = cardAddOrEditModel.toCard(user.id);
-        card.participants.add(user);
-        var members = cardAddOrEditModel.Members;
+        card.members.add(user);
+        card.user = user;
+        var memberModels = cardAddOrEditModel.members;
         var memberNames = new ArrayList<String>();
-        for (var member : members
-        ) {
-            memberNames.add(member.Username);
-        }
-        Iterable<User> participants = userRepository.findAllByUserName(memberNames);
-        card.participants.addAll((Collection<? extends User>) participants);
+        var members = new ArrayList<User>();
+        if (memberModels != null)
+            for (var userModel : memberModels
+            ) {
+                var member = userRepository.findByUserName(userModel.username);
+                members.add(member);
+            }
+        //var members = userRepository.findAllByUserName(memberNames);
+        card.members.addAll(members);
         var added = service.addCard(card);
         return ok(added.toCardModel());
     }
@@ -63,7 +67,7 @@ public class CardController extends BaseController {
     }
 
     @PatchMapping("/{cardId}/edit")
-    ResponseEntity add(@RequestBody CardAddOrEditModel cardAddOrEditModel, @PathVariable Integer cardId) {
+    ResponseEntity add(@RequestBody CardModel cardAddOrEditModel, @PathVariable Integer cardId) {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
@@ -72,10 +76,20 @@ public class CardController extends BaseController {
         if (card == null) {
             return notFound(String.format("card with specified id not found"));
         }
-        if (card.userId!=userId){
+        if (card.userId != userId) {
             return badRequest("ne twoe");
         }
         card.updateFromModel(cardAddOrEditModel);
+        var memberModels = cardAddOrEditModel.members;
+        var members = new ArrayList<User>();
+        if (memberModels != null)
+            for (var userModel : memberModels
+            ) {
+                var member = userRepository.findByUserName(userModel.username);
+                members.add(member);
+            }
+        card.members.clear();
+        card.members.addAll(members);
         service.addCard(card);
         return ok(card.toCardModel());
     }
@@ -90,7 +104,7 @@ public class CardController extends BaseController {
         if (cardToDelete == null) {
             return notFound("card with specified id not found");
         }
-        if (cardToDelete.userId!=userId){
+        if (cardToDelete.userId != userId) {
             return badRequest("ne twoe");
         }
         service.deleteById(cardId);

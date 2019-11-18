@@ -2,10 +2,13 @@ package com.Organizer.Snacky.DbEnteiies;
 
 import com.Organizer.Snacky.Models.CardAddOrEditModel;
 import com.Organizer.Snacky.Models.CardModel;
+import com.Organizer.Snacky.Models.DescriptionModel;
+import com.Organizer.Snacky.Models.UserModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +21,7 @@ public class Card {
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
-        participants = new HashSet<>();
+        members = new HashSet<User>();
     }
 
     public Card() {
@@ -33,7 +36,7 @@ public class Card {
     public String title;
     @Column(name = "description", nullable = false)
     public String description;
-    @Column(name = "user_id", nullable = true)
+    @Column(name = "user_id", nullable = false)
     public Integer userId;
     @Column(name = "start_date", nullable = true)
     public Timestamp startDate;
@@ -44,28 +47,29 @@ public class Card {
     @JoinTable(name = "user_cards",
             joinColumns = @JoinColumn(name = "card_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    public Set<User> participants;
+    public Set<User> members;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false, updatable = false, insertable = false)
-    User user;
+    public User user;
 
-    public void updateFromModel(CardAddOrEditModel model) {
+    public void updateFromModel(CardModel model) {
         title = model.title;
         startDate = model.startDate;
         endDate = model.endDate;
+        description = model.description.content;
+
     }
 
     public CardModel toCardModel() {
         var cardModel =  new CardModel();
-        cardModel.Description.Content = description;
-        cardModel.StartDate = startDate;
-        cardModel.EndDate = endDate;
-        cardModel.Name = title;
-        cardModel.Author.Username = user.userName;
-        for (var member: participants
+        cardModel.endDate = endDate;
+        cardModel.title = title;
+        cardModel.description.content = description;
+        cardModel.creator.username = user.userName;
+        for (var member: members
              ) {
-            cardModel.Members.add(member.toModel());
+            cardModel.members.add(member.toModel());
         }
         return cardModel;
 

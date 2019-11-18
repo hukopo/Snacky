@@ -20,8 +20,5 @@ public class UserServiceImp implements UserService {
         userRepository.saveAndFlush(user);
     }
 
-    @Override
-    public Iterable<User> getUsersByLogin(String userName) {
-        return userRepository.findAllByUserName(userName);
-    }
+
 }

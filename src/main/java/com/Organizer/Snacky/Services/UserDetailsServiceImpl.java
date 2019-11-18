@@ -21,10 +21,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        var users = userRepository.findAllByUserName(username).iterator();
-        if (!users.hasNext())
+        var user = userRepository.findByUserName(username);
+        if (user==null)
             throw new UsernameNotFoundException(username);
-            var user = users.next();
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("User"));
 
