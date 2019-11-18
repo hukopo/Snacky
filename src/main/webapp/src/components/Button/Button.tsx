@@ -9,10 +9,8 @@ interface ButtonProps {
 export class Button extends React.Component<ButtonProps> {
   render() {
     return (
-      <div className={cn("position")}>
-        <div onClick={this.props.onClick} className={cn("add-button")}>
-          {this.props.text}
-        </div>
+      <div onClick={this.props.onClick} className={cn("add-button")}>
+        {this.props.text}
       </div>
     );
   }

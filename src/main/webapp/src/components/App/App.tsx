@@ -2,13 +2,13 @@ import * as React from "react";
 import { AddCardModal } from "../AddCardModal/AddCardModal";
 import { Board } from "../Board/Board";
 import { Button } from "../Button/Button";
-import "./App.less";
+import cn from "./App.less";
 
 interface AppState {
   addCardModalIsOpen: boolean;
 }
 
-export class App extends React.Component<void, AppState> {
+export class App extends React.Component<{}, AppState> {
   state = {
     addCardModalIsOpen: false
   };
@@ -16,11 +16,17 @@ export class App extends React.Component<void, AppState> {
   render() {
     return (
       <>
-        <Button
-          text="Добавить карточку"
-          onClick={() => this.setState({ addCardModalIsOpen: true })}
-        />
-        {this.state.addCardModalIsOpen && <AddCardModal />}
+        <div className={cn("position")}>
+          <Button
+            text="Добавить карточку"
+            onClick={() => this.setState({ addCardModalIsOpen: true })}
+          />
+        </div>
+        {this.state.addCardModalIsOpen && (
+          <AddCardModal
+            close={() => this.setState({ addCardModalIsOpen: false })}
+          />
+        )}
         <Board />
       </>
     );

@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "./ModalWindow.less";
 
-interface ModalWindowProps {
+export interface ModalWindowProps {
   close: () => void;
 }
 

@@ -1,11 +1,12 @@
 interface CardDto {
-  title: String;
+  //creator: UserModel;
+  title: string;
   description: DescriptionModel;
   members: UserModel[];
-  creator: UserModel;
+  tags: TagModel[];
   place: PlaceModel;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }
 
 interface DescriptionModel {
@@ -13,7 +14,7 @@ interface DescriptionModel {
 }
 
 interface UserModel {
-  username: string;
+  userName: string;
   email: string;
 }
 
@@ -21,4 +22,8 @@ interface PlaceModel {
   name: string;
   longitude: number;
   latitude: number;
+}
+
+interface TagModel {
+  name: string;
 }
