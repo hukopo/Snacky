@@ -7,26 +7,38 @@ interface AddCardModalProps extends ModalWindowProps {}
 //interface HTMLEventType extends HTMLInputElement, HTMLTextAreaElement {}
 
 interface AddCardModalState {
-  title: string;
-  description: string;
-  place: string;
-  members: string;
-  tags: string;
-  startDate: string;
-  endDate: string;
+  title?: string;
+  description?: string;
+  place?: string;
+  members?: string;
+  tags?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+interface dalState {
+  x: string;
+  y: string;
+  mapV: boolean;
 }
 
 export class AddCardModal extends React.Component<
   AddCardModalProps,
-  AddCardModalState
+  AddCardModalState & dalState
 > {
+  state: AddCardModalState & dalState = {
+    x: "33",
+    y: "33",
+    mapV: false
+  };
+
   sendCard = async (): Promise<void> => {
     const state = this.state;
-    const splitedTags = state.tags
+    const splitedTags = this.state.tags
       .split(" ")
       .map(t => ({ name: t } as TagModel));
     const card: CardDto = {
-      //creator: { userName: "", email: "" },
+      creator: { userName: "", email: "" },
       title: state.title,
       description: { content: state.description },
       tags: splitedTags,
@@ -39,7 +51,6 @@ export class AddCardModal extends React.Component<
         latitude: 90.9
       }
     };
-
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -112,9 +123,23 @@ export class AddCardModal extends React.Component<
             id="endDate"
           />
         </div>
+        <div>
+          <label htmlFor="x">x</label>
+          <input onChange={this.handleInputChange} id="x" />
+          <label htmlFor="y">y</label>
+          <input onChange={this.handleInputChange} id="y" />
+        </div>
+        <Button text="найти" onClick={() => this.setState({ mapV: true })} />
         <YMaps>
-          <div>My awesome application with maps!</div>
-          <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
+          <div>карта</div>
+          {this.state.mapV && (
+            <Map
+              defaultState={{
+                center: [parseFloat(this.state.x), parseFloat(this.state.x)],
+                zoom: 10
+              }}
+            />
+          )}
         </YMaps>
         <Button text="Добавить карточку" onClick={this.sendCard} />
       </ModalWindow>

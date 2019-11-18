@@ -1,5 +1,5 @@
 interface CardDto {
-  //creator: UserModel;
+  creator: UserModel;
   title: string;
   description: DescriptionModel;
   members: UserModel[];
