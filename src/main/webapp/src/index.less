@@ -1,34 +1,64 @@
 @import "./ColorSchema.less";
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+input {
+  border-radius: 10px;
+  border: none;
+  background: @card-background;
+  padding: @base-size;
+  margin: @base-size;
+  color: @text-color;
+}
+
+input:focus {
+  outline: none;
+  padding: @base-size - 1px;
+  border: solid 1px @tag-color;
+}
+
+textarea {
+  border-radius: 10px;
+  border: none;
+  background: @card-background;
+  padding: @base-size;
+  margin: @base-size;
+  color: @text-color;
+}
+
+textarea:focus {
+  outline: none;
+  padding: @base-size - 1px;
+  border: solid 1px @tag-color;
 }
 
 html {
-    font-family: Segoe UI, sans-serif;
-    font-size: 12px;
-    letter-spacing: 0;
-    color: @text-color;
-    height: 100%;
-    background: @background;
+  font-family: Segoe UI, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: @text-color;
+  height: 100%;
+  background: @background;
 }
 
 a {
-    color: @default-link-color;
-    text-decoration: none;
-    cursor: pointer;
+  color: @default-link-color;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
