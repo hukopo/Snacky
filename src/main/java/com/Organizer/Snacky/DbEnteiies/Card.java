@@ -1,14 +1,10 @@
 package com.Organizer.Snacky.DbEnteiies;
 
-import com.Organizer.Snacky.Models.CardAddOrEditModel;
 import com.Organizer.Snacky.Models.CardModel;
-import com.Organizer.Snacky.Models.DescriptionModel;
-import com.Organizer.Snacky.Models.UserModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,6 +45,12 @@ public class Card {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     public Set<User> members;
 
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name = "card_tags",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    public Set<Tag> tags;
+
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false, updatable = false, insertable = false)
     public User user;
@@ -66,7 +68,7 @@ public class Card {
         cardModel.endDate = endDate;
         cardModel.title = title;
         cardModel.description.content = description;
-        cardModel.creator.username = user.userName;
+        cardModel.creator.userName = user.userName;
         for (var member: members
              ) {
             cardModel.members.add(member.toModel());

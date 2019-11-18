@@ -1,7 +1,6 @@
 package com.Organizer.Snacky.Controllers;
 
 import com.Organizer.Snacky.DbEnteiies.User;
-import com.Organizer.Snacky.Models.CardAddOrEditModel;
 import com.Organizer.Snacky.DBRepos.UserRepository;
 import com.Organizer.Snacky.DbEnteiies.Card;
 import com.Organizer.Snacky.Models.CardModel;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 @RestController
 @RequestMapping("cards")
@@ -41,7 +39,7 @@ public class CardController extends BaseController {
         if (memberModels != null)
             for (var userModel : memberModels
             ) {
-                var member = userRepository.findByUserName(userModel.username);
+                var member = userRepository.findByUserName(userModel.userName);
                 members.add(member);
             }
         //var members = userRepository.findAllByUserName(memberNames);
@@ -56,8 +54,9 @@ public class CardController extends BaseController {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
-        var userId = userRepository.findByUserName(auth.getName()).id;
-        var cards = service.getCardsByUserId(userId);
+        var user = userRepository.findByUserName(auth.getName());
+
+        var cards = user.participantsCards;
         var cardsModels = new ArrayList<CardModel>();
         for (var card : cards
         ) {
@@ -77,7 +76,7 @@ public class CardController extends BaseController {
             return notFound(String.format("card with specified id not found"));
         }
         if (card.userId != userId) {
-            return badRequest("ne twoe");
+            return forbidden("ne twoe");
         }
         card.updateFromModel(cardAddOrEditModel);
         var memberModels = cardAddOrEditModel.members;
@@ -85,7 +84,7 @@ public class CardController extends BaseController {
         if (memberModels != null)
             for (var userModel : memberModels
             ) {
-                var member = userRepository.findByUserName(userModel.username);
+                var member = userRepository.findByUserName(userModel.userName);
                 members.add(member);
             }
         card.members.clear();
@@ -105,7 +104,7 @@ public class CardController extends BaseController {
             return notFound("card with specified id not found");
         }
         if (cardToDelete.userId != userId) {
-            return badRequest("ne twoe");
+            return forbidden("ne twoe");
         }
         service.deleteById(cardId);
         return ok("");

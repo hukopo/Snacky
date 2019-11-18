@@ -31,9 +31,9 @@ public class User {
     public String hash;
 
    @ManyToMany(mappedBy = "members",targetEntity = Card.class)
-   Set<Card> participantsCards;
+   public Set<Card> participantsCards;
    @OneToMany(mappedBy = "user")
-   Set<Card> userCards;
+   public Set<Card> userCards;
 
 
 
@@ -64,7 +64,7 @@ public class User {
 
     public UserModel toModel() {
         var userModel = new UserModel();
-        userModel.username = userName;
+        userModel.userName = userName;
         return userModel;
     }
 }
