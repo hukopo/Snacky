@@ -8,13 +8,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 abstract class BaseController<T> {
 
-    Authentication getAuthentication(){
+    Authentication getAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return authentication;
         }
         return null;
     }
+
     ResponseEntity notFound(T body) {
         return new ResponseEntity(body, HttpStatus.NOT_FOUND);
     }
@@ -26,6 +27,11 @@ abstract class BaseController<T> {
     ResponseEntity<T> unauthorized(T body) {
         return new ResponseEntity(body, HttpStatus.UNAUTHORIZED);
     }
+
+    ResponseEntity<T> forbidden(T body) {
+        return new ResponseEntity(body, HttpStatus.FORBIDDEN);
+    }
+
 
     ResponseEntity<T> ok(T body) {
         return new ResponseEntity(body, HttpStatus.OK);
