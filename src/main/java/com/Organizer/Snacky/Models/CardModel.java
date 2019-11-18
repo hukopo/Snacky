@@ -9,11 +9,13 @@ public  class CardModel {
         creator = new UserModel();
         place = new PlaceModel();
         members = new ArrayList<>();
+        tags = new ArrayList<>();
     };
     public String title;
     public UserModel creator;
     public DescriptionModel description;
     public ArrayList<UserModel> members;
+    public ArrayList<TagModel> tags;
     public PlaceModel place;
     public Timestamp startDate;
     public Timestamp endDate;

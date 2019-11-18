@@ -1,5 +1,7 @@
 package com.Organizer.Snacky.Controllers;
 
+import com.Organizer.Snacky.DBRepos.TagRepository;
+import com.Organizer.Snacky.DbEnteiies.Tag;
 import com.Organizer.Snacky.DbEnteiies.User;
 import com.Organizer.Snacky.DBRepos.UserRepository;
 import com.Organizer.Snacky.DbEnteiies.Card;
@@ -21,29 +23,22 @@ public class CardController extends BaseController {
     private CardService service;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
 
     @PostMapping("/add")
-    ResponseEntity add(@RequestBody CardModel cardAddOrEditModel) {
+    ResponseEntity add(@RequestBody CardModel cardModel) {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
         var userName = auth.getName();
-        var user = userRepository.findByUserName(userName);
-        var card = cardAddOrEditModel.toCard(user.id);
+        var user = userRepository.findByUserName(userName).get();
+        var card = cardModel.toCard(user.id);
         card.members.add(user);
         card.user = user;
-        var memberModels = cardAddOrEditModel.members;
-        var memberNames = new ArrayList<String>();
-        var members = new ArrayList<User>();
-        if (memberModels != null)
-            for (var userModel : memberModels
-            ) {
-                var member = userRepository.findByUserName(userModel.userName);
-                members.add(member);
-            }
-        //var members = userRepository.findAllByUserName(memberNames);
-        card.members.addAll(members);
+        FillMembers(cardModel, card);
+        FillTags(cardModel, card);
         var added = service.addCard(card);
         return ok(added.toCardModel());
     }
@@ -54,8 +49,7 @@ public class CardController extends BaseController {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
-        var user = userRepository.findByUserName(auth.getName());
-
+        var user = userRepository.findByUserName(auth.getName()).get();
         var cards = user.participantsCards;
         var cardsModels = new ArrayList<CardModel>();
         for (var card : cards
@@ -66,11 +60,11 @@ public class CardController extends BaseController {
     }
 
     @PatchMapping("/{cardId}/edit")
-    ResponseEntity add(@RequestBody CardModel cardAddOrEditModel, @PathVariable Integer cardId) {
+    ResponseEntity add(@RequestBody CardModel cardModel, @PathVariable Integer cardId) {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
-        var userId = userRepository.findByUserName(auth.getName()).id;
+        var userId = userRepository.findByUserName(auth.getName()).get().id;
         Card card = service.getCardById(cardId);
         if (card == null) {
             return notFound(String.format("card with specified id not found"));
@@ -78,17 +72,11 @@ public class CardController extends BaseController {
         if (card.userId != userId) {
             return forbidden("ne twoe");
         }
-        card.updateFromModel(cardAddOrEditModel);
-        var memberModels = cardAddOrEditModel.members;
-        var members = new ArrayList<User>();
-        if (memberModels != null)
-            for (var userModel : memberModels
-            ) {
-                var member = userRepository.findByUserName(userModel.userName);
-                members.add(member);
-            }
+        card.updateFromModel(cardModel);
         card.members.clear();
-        card.members.addAll(members);
+        FillMembers(cardModel, card);
+        card.tags.clear();
+        FillTags(cardModel, card);
         service.addCard(card);
         return ok(card.toCardModel());
     }
@@ -98,7 +86,7 @@ public class CardController extends BaseController {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
-        var userId = userRepository.findByUserName(auth.getName()).id;
+        var userId = userRepository.findByUserName(auth.getName()).get().id;
         var cardToDelete = service.getCardById(cardId);
         if (cardToDelete == null) {
             return notFound("card with specified id not found");
@@ -110,5 +98,30 @@ public class CardController extends BaseController {
         return ok("");
     }
 
+    private void FillTags(@RequestBody CardModel cardModel, Card card) {
+        var tags = cardModel.tags;
+        if (tags != null)
+            for (var tag : tags
+            ) {
+                var existingTag = tagRepository.findByName(tag.name);
+                if (existingTag.isPresent())
+                    card.tags.add(existingTag.get());
+                else {
+                    var newTag = new Tag(tag.name);
+                    tagRepository.saveAndFlush(newTag);
+                    card.tags.add(newTag);
+                }
+            }
+    }
+
+    private void FillMembers(@RequestBody CardModel cardModel, Card card) {
+        var memberModels = cardModel.members;
+        if (memberModels != null)
+            for (var userModel : memberModels
+            ) {
+                var member = userRepository.findByUserName(userModel.userName);
+                member.ifPresent(user -> card.members.add(user));
+            }
+    }
 
 }
