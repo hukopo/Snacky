@@ -18,6 +18,7 @@ public class Card {
         this.endDate = endDate;
         this.description = description;
         members = new HashSet<User>();
+        tags = new HashSet<>();
     }
 
     public Card() {
@@ -73,6 +74,11 @@ public class Card {
              ) {
             cardModel.members.add(member.toModel());
         }
+        for (var tag: tags
+        ) {
+            cardModel.tags.add(tag.toModel());
+        }
+
         return cardModel;
 
     }
