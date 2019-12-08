@@ -1,17 +1,31 @@
 import * as React from "react";
-import { AddCardModal } from "../AddCardModal/AddCardModal";
 import { Board } from "../Board/Board";
 import { Button } from "../Button/Button";
 import { Logout } from "../Logout/Logout";
 import cn from "./App.less";
+import CardModal from "../CardModal";
+
+enum CardModalState {
+    openForEdit,
+    openForAdding,
+    close
+}
 
 interface AppState {
-  addCardModalIsOpen: boolean;
+  cardModalState: CardModalState
+  editableCard: CardDto | undefined
 }
 
 export class App extends React.Component<{}, AppState> {
   state = {
-    addCardModalIsOpen: false
+    cardModalState: CardModalState.close,
+    editableCard: undefined
+  };
+
+  modalClose = () => this.setState({ cardModalState: CardModalState.close, editableCard: undefined });
+  onEditCard = (card: CardDto) => {
+    this.setState({ editableCard: card});
+    this.setState({ cardModalState: CardModalState.openForEdit });
   };
 
   render() {
@@ -21,15 +35,16 @@ export class App extends React.Component<{}, AppState> {
         <div className={cn("position")}>
           <Button
             text="Добавить карточку"
-            onClick={() => this.setState({ addCardModalIsOpen: true })}
+            onClick={() => this.setState({ cardModalState: CardModalState.openForAdding })}
           />
         </div>
-        {this.state.addCardModalIsOpen && (
-          <AddCardModal
-            close={() => this.setState({ addCardModalIsOpen: false })}
-          />
+        {this.state.cardModalState === CardModalState.openForAdding && (
+          <CardModal edit={false} close={this.modalClose}/>
         )}
-        <Board />
+        {this.state.cardModalState === CardModalState.openForEdit && (
+          <CardModal edit={true} close={this.modalClose} card={this.state.editableCard} />
+        )}
+        <Board onEditCard={this.onEditCard} />
       </>
     );
   }

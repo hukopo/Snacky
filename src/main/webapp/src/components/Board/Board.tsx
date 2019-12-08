@@ -5,8 +5,10 @@ import cn from "./Board.less";
 interface BoardsState {
   cards: CardDto[];
 }
-
-export class Board extends React.Component<{}, BoardsState> {
+interface BoardProps {
+  onEditCard: (card: CardDto) => void
+}
+export class Board extends React.Component<BoardProps, BoardsState> {
   state = {
     cards: [] as CardDto[]
   };
@@ -36,7 +38,7 @@ export class Board extends React.Component<{}, BoardsState> {
         ) : (
           <div className={cn("cards")}>
             {this.state.cards.map(card => (
-              <Card key={card.title} card={card} />
+              <Card key={card.title} card={card} onEditCard={this.props.onEditCard} />
             ))}
           </div>
         )}
