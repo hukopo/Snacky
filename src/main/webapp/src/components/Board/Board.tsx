@@ -31,7 +31,6 @@ export class Board extends React.Component<{}, BoardsState> {
   render() {
     return (
       <div className={cn("board")}>
-        <input />
         {this.state.cards.length === 0 ? (
           "loading..."
         ) : (
