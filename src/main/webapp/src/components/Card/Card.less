@@ -1,38 +1,47 @@
 @import "../../ColorSchema.less";
 
 .card {
-    background: @card-background;
-    width: 30*@base-size;
-    height: 15*@base-size;
-    margin: @base-size;
-    padding: @base-size;
-    position: relative;
-    border-radius: 10px;
+  background: @card-background;
+  width: 30 * @base-size;
+  height: 15 * @base-size;
+  margin: @base-size;
+  padding: @base-size;
+  position: relative;
+  border-radius: 10px;
 
-    .header{
-        font-size: 1.5em;
-        //text-align: center;
-        color: @default-link-color;
+  .header {
+    font-size: 1.5em;
+    //text-align: center;
+    color: @default-link-color;
+  }
+
+  .tags {
+    color: @tag-color;
+
+    .add {
+      cursor: pointer;
+    }
+  }
+
+  .controls {
+    position: absolute;
+    right: 8px;
+
+    .control {
+      display: inline-block;
+      cursor: pointer;
     }
 
-    .tags{
-        color: @tag-color;
-
-        .add{
-            cursor: pointer;
-        }
+    .control:hover {
+      transform: scale(1.5);
     }
 
-    .controls {
-        position: absolute;
-        right: 8px;
-
-        .control {
-            cursor: pointer;
-        }
-
-        .control + .control {
-            margin-left: 4px;
-        }
+    .control + .control {
+      margin-left: 4px;
     }
+  }
+}
+
+.card:hover {
+  transform: scale(1.05);
 }
