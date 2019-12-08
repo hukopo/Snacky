@@ -31,7 +31,9 @@ export class Card extends React.Component<CardProps> {
     );
   }
 
-  onTrash = async () => {};
+  onTrash = async () => {
+    await fetch(`/cards/${this.props.card.id}/delete`, { method: 'DELETE' })
+  };
 
   onEdit = () => {}
 }
