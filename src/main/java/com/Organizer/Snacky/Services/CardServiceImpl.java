@@ -34,6 +34,10 @@ public class CardServiceImpl implements CardService {
     public Iterable<Card> getCardsByUserId(Integer userId) {
         return cardsRepository.findAllByUserId(userId);
     }
+    @Override
+    public Iterable<Card> getAllCards() {
+        return cardsRepository.findAll();
+    }
 
     @Override
     public void deleteById(Integer cardId) {

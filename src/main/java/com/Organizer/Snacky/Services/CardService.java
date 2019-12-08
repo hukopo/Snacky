@@ -9,6 +9,7 @@ import java.util.List;
 public interface CardService {
     public Card addCard(Card card);
     public Card getCardById(Integer id);
+    public Iterable<Card> getAllCards();
     public Iterable<Card> getCardsByUserId(Integer userId);
     public void deleteById(Integer cardId);
 }

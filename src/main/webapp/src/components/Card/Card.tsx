@@ -11,12 +11,17 @@ export class Card extends React.Component<CardProps> {
     return (
       <div className={cn("card")}>
         <div className={cn("controls")}>
-          <span className={cn("control")} onClick={this.onEdit}>🖊</span>
-          <span className={cn("control")} onClick={this.onTrash}>🗑️</span>
+          <span className={cn("control")} onClick={this.onEdit}>
+            🖊
+          </span>
+          <span className={cn("control")} onClick={this.onTrash}>
+            🗑️
+          </span>
         </div>
         <div>owner: {card.creator.userName}</div>
-        <div className={cn("header")}>{card.title}</div>
-        <div>{card.description.content}</div>
+        <div className={cn("header")}>title: {card.title}</div>
+        <div>description: {card.description.content}</div>
+        <div>members: {card.members.map(m => m.userName)}</div>
         <div className={cn("tags")}>
           tags: {card.tags.map(t => t.name)}
           {/* <span className={cn("add")} onClick={() => alert("add tag modal")}>
@@ -35,5 +40,5 @@ export class Card extends React.Component<CardProps> {
     await fetch(`/cards/${this.props.card.id}/delete`, { method: 'DELETE' })
   };
 
-  onEdit = () => {}
+  onEdit = () => {};
 }

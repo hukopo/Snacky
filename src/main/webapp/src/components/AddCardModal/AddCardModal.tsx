@@ -45,12 +45,16 @@ export class AddCardModal extends React.Component<
     const splitedTags = this.state.tags
       .split(" ")
       .map(t => ({ name: t } as TagModel));
+    const splitedMembers = this.state.tags
+      .split(" ")
+      .map(m => ({ userName: m } as UserModel));
     const card: CardDto = {
+      id: 0,
       creator: { userName: "", email: "" },
       title: state.title,
       description: { content: state.description },
       tags: splitedTags,
-      members: [],
+      members: splitedMembers,
       startDate: state.startDate,
       endDate: state.startDate,
       place: {

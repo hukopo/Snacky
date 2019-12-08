@@ -2,9 +2,10 @@ package com.Organizer.Snacky.Controllers;
 
 import com.Organizer.Snacky.DBRepos.PlaceRepository;
 import com.Organizer.Snacky.DBRepos.TagRepository;
-import com.Organizer.Snacky.DbEnteiies.Tag;
 import com.Organizer.Snacky.DBRepos.UserRepository;
 import com.Organizer.Snacky.DbEnteiies.Card;
+import com.Organizer.Snacky.DbEnteiies.Tag;
+import com.Organizer.Snacky.DbEnteiies.User;
 import com.Organizer.Snacky.Models.CardModel;
 import com.Organizer.Snacky.Services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 @RestController
 @RequestMapping("cards")
@@ -61,16 +63,15 @@ public class CardController extends BaseController {
         if (auth == null)
             return unauthorized("");
         var user = userRepository.findByUserName(auth.getName()).get();
-        var cards = user.participantsCards;
+        Iterator<Card> cardIterator = (user.role.equals(User.Role.Admin) ? service.getAllCards() : user.participantsCards).iterator();
         var cardsModels = new ArrayList<CardModel>();
         var i = 0;
-        for (var card : cards
-        ) {
-            if (i > skip + take)
-                break;
+        while (cardIterator.hasNext() && i < take + skip) {
+            var currentCard = cardIterator.next();
+            if (i >= skip) {
+                cardsModels.add(currentCard.toCardModel());
+            }
             i++;
-            if (i > skip)
-                cardsModels.add(card.toCardModel());
         }
         cardsModels.sort(Comparator.comparingInt(a -> a.id));
         return ok(cardsModels);
@@ -81,12 +82,13 @@ public class CardController extends BaseController {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
-        var userId = userRepository.findByUserName(auth.getName()).get().id;
+        var user = userRepository.findByUserName(auth.getName()).get();
+        var userId = user.id;
         Card card = service.getCardById(cardId);
         if (card == null) {
             return notFound(String.format("card with specified id not found"));
         }
-        if (card.userId != userId) {
+        if (card.userId != userId && !user.role.equals(User.Role.Admin)) {
             return forbidden("ne twoe");
         }
         card.updateFromModel(cardModel);
@@ -103,12 +105,13 @@ public class CardController extends BaseController {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
-        var userId = userRepository.findByUserName(auth.getName()).get().id;
+        var user = userRepository.findByUserName(auth.getName()).get();
+        var userId = user.id;
         var cardToDelete = service.getCardById(cardId);
         if (cardToDelete == null) {
             return notFound("card with specified id not found");
         }
-        if (cardToDelete.userId != userId) {
+        if (cardToDelete.userId != userId  && !user.role.equals(User.Role.Admin)) {
             return forbidden("ne twoe");
         }
         service.deleteById(cardId);
