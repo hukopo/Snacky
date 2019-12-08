@@ -12,6 +12,7 @@ export class Board extends React.Component<{}, BoardsState> {
   };
 
   componentDidMount = () => {
+    this.updateBoard();
     setInterval(this.updateBoard, 5 * 1000);
   };
 
