@@ -11,9 +11,9 @@ export class Board extends React.Component<{}, BoardsState> {
     cards: [] as CardDto[]
   };
 
-  componentDidMount = () => {
-    this.updateBoard();
-    setInterval(this.updateBoard, 5 * 1000);
+  componentDidMount = async () => {
+    await this.updateBoard();
+    setInterval(async () => await this.updateBoard(), 5 * 1000);
   };
 
   loadCards = async (): Promise<CardDto[]> => {
