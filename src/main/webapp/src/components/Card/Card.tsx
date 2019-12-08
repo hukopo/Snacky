@@ -21,13 +21,8 @@ export class Card extends React.Component<CardProps> {
         <div>owner: {card.creator.userName}</div>
         <div className={cn("header")}>title: {card.title}</div>
         <div>description: {card.description.content}</div>
-        <div>members: {card.members.map(m => m.userName)}</div>
-        <div className={cn("tags")}>
-          tags: {card.tags.map(t => t.name)}
-          {/* <span className={cn("add")} onClick={() => alert("add tag modal")}>
-            +
-          </span> */}
-        </div>
+        <div>members: {card.members.map(m => ` ${m.userName}`)}</div>
+        <div className={cn("tags")}>tags: {card.tags.map(t => t.name)}</div>
         <div>
           период:
           {card.startDate} - {card.endDate}
@@ -37,7 +32,7 @@ export class Card extends React.Component<CardProps> {
   }
 
   onTrash = async () => {
-    await fetch(`/cards/${this.props.card.id}/delete`, { method: 'DELETE' })
+    await fetch(`/cards/${this.props.card.id}/delete`, { method: "DELETE" });
   };
 
   onEdit = () => {};
