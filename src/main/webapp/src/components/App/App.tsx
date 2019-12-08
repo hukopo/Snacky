@@ -2,6 +2,7 @@ import * as React from "react";
 import { AddCardModal } from "../AddCardModal/AddCardModal";
 import { Board } from "../Board/Board";
 import { Button } from "../Button/Button";
+import { Logout } from "../Logout/Logout";
 import cn from "./App.less";
 
 interface AppState {
@@ -16,6 +17,7 @@ export class App extends React.Component<{}, AppState> {
   render() {
     return (
       <>
+        <Logout />
         <div className={cn("position")}>
           <Button
             text="Добавить карточку"
