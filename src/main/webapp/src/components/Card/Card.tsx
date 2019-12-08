@@ -10,6 +10,10 @@ export class Card extends React.Component<CardProps> {
     const card = this.props.card;
     return (
       <div className={cn("card")}>
+        <div className={cn("controls")}>
+          <span className={cn("control")} onClick={this.onEdit}>🖊</span>
+          <span className={cn("control")} onClick={this.onTrash}>🗑️</span>
+        </div>
         <div>owner: {card.creator.userName}</div>
         <div className={cn("header")}>{card.title}</div>
         <div>{card.description.content}</div>
@@ -26,4 +30,8 @@ export class Card extends React.Component<CardProps> {
       </div>
     );
   }
+
+  onTrash = async () => {};
+
+  onEdit = () => {}
 }
