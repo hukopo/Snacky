@@ -15,8 +15,8 @@ public class UserServiceImp implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void addUser(String userName, String password) {
-        var user = new User(userName, bCryptPasswordEncoder.encode(password));
+    public void addUser(String userName, String password, User.Role role) {
+        var user = new User(userName, bCryptPasswordEncoder.encode(password), role);
         userRepository.saveAndFlush(user);
     }
 
