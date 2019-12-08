@@ -64,9 +64,9 @@ export default class CardModal extends React.Component<
     const splitedTags = state.tags
       .split(" ")
       .map(t => ({ name: t } as TagModel));
-    const splitedMembers = state.tags
+    const splitedMembers = state.members
       .split(" ")
-      .map(t => ({ name: t } as TagModel));
+      .map(m => ({ userName: m } as UserModel));
     return {
       creator: this.props.card
         ? this.props.card.creator
