@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @RestController
 @RequestMapping("cards")
@@ -71,7 +72,7 @@ public class CardController extends BaseController {
             if (i > skip)
                 cardsModels.add(card.toCardModel());
         }
-
+        cardsModels.sort(Comparator.comparingInt(a -> a.id));
         return ok(cardsModels);
     }
 
