@@ -11,12 +11,12 @@ export class Card extends React.Component<CardProps> {
     return (
       <div className={cn("card")}>
         <div className={cn("controls")}>
-          <span className={cn("control")} onClick={this.onEdit}>
+          <div className={cn("control")} onClick={this.onEdit}>
             🖊
-          </span>
-          <span className={cn("control")} onClick={this.onTrash}>
+          </div>
+          <div className={cn("control")} onClick={this.onTrash}>
             🗑️
-          </span>
+          </div>
         </div>
         <div>owner: {card.creator.userName}</div>
         <div className={cn("header")}>title: {card.title}</div>

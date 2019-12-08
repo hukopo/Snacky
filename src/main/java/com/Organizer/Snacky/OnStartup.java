@@ -27,7 +27,7 @@ public class OnStartup implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        userService.addUser("Kartoshkin", "fullcontrol", User.Role.Admin);
+            userService.addUser("Kartoshkin", "fullcontrol", User.Role.Admin);
         userService.addUser("Kapustin", "123", User.Role.User);
 
         var kartoshkin = userRepository.findByUserName("Kartoshkin").get();
