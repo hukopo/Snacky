@@ -14,10 +14,14 @@ export class Card extends React.Component<CardProps> {
         <div className={cn("header")}>{card.title}</div>
         <div>{card.description.content}</div>
         <div className={cn("tags")}>
-          {card.title}
+          tags: {card.tags.map(t => t.name)}
           {/* <span className={cn("add")} onClick={() => alert("add tag modal")}>
             +
           </span> */}
+        </div>
+        <div>
+          период:
+          {card.startDate} - {card.endDate}
         </div>
       </div>
     );

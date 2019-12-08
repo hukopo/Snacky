@@ -1,19 +1,20 @@
 import * as React from "react";
-import { Map, YMaps } from "react-yandex-maps";
+import { Map, Placemark, YMaps } from "react-yandex-maps";
 import { Button } from "../Button/Button";
+import { LocationPickerY } from "../LocationPicker/LocationPicker";
 import { ModalWindow, ModalWindowProps } from "../ModalWindow/ModalWindow";
 
 interface AddCardModalProps extends ModalWindowProps {}
 //interface HTMLEventType extends HTMLInputElement, HTMLTextAreaElement {}
 
 interface AddCardModalState {
-  title?: string;
-  description?: string;
-  place?: string;
-  members?: string;
-  tags?: string;
-  startDate?: string;
-  endDate?: string;
+  title: string;
+  description: string;
+  place: string;
+  members: string;
+  tags: string;
+  startDate: string;
+  endDate: string;
 }
 
 interface dalState {
@@ -29,7 +30,14 @@ export class AddCardModal extends React.Component<
   state: AddCardModalState & dalState = {
     x: "33",
     y: "33",
-    mapV: false
+    mapV: false,
+    title: "",
+    description: "",
+    members: "",
+    place: "",
+    tags: "",
+    startDate: "0001-01-01T01:01",
+    endDate: "0001-01-01T01:01"
   };
 
   sendCard = async (): Promise<void> => {
@@ -47,8 +55,8 @@ export class AddCardModal extends React.Component<
       endDate: state.startDate,
       place: {
         name: "place",
-        longitude: 1.2,
-        latitude: 90.9
+        longitude: parseFloat(state.x),
+        latitude: parseFloat(state.y)
       }
     };
     const myHeaders = new Headers();
@@ -129,6 +137,9 @@ export class AddCardModal extends React.Component<
           <label htmlFor="y">y</label>
           <input onChange={this.handleInputChange} id="y" />
         </div>
+
+        <LocationPickerY />
+
         <Button text="найти" onClick={() => this.setState({ mapV: true })} />
         <YMaps>
           <div>карта</div>
@@ -138,7 +149,11 @@ export class AddCardModal extends React.Component<
                 center: [parseFloat(this.state.x), parseFloat(this.state.x)],
                 zoom: 10
               }}
-            />
+            >
+              <Placemark
+                geometry={[parseFloat(this.state.x), parseFloat(this.state.x)]}
+              />
+            </Map>
           )}
         </YMaps>
         <Button text="Добавить карточку" onClick={this.sendCard} />

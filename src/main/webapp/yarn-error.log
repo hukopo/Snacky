@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/react-google-maps
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/react-leaflet-location-picker
 
 PATH: 
   C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\GitExtensions\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\holkin\AppData\Local\Microsoft\WindowsApps;C:\Users\holkin\AppData\Local\Programs\Git\cmd;C:\Users\holkin\bin;C:\Program Files\JetBrains\JetBrains Rider 2019.2.3\bin;C:\Users\holkin\.dotnet\tools;C:\Users\holkin\AppData\Roaming\npm;C:\Users\holkin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\holkin\AppData\Local\Yarn\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2freact-google-maps: Not found
+  Error: https://registry.yarnpkg.com/@types%2freact-leaflet-location-picker: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66035:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140564:22)
       at Request.emit (events.js:210:5)
@@ -50,6 +50,9 @@ npm manifest:
       "react": "^16.8.6",
       "react-dom": "^16.8.6",
       "react-google-maps": "^9.4.5",
+      "react-leaflet-location-picker": "^1.4.1",
+      "react-location-picker": "^1.5.0",
+      "react-yandex-maps": "^4.2.0",
       "reset-css": "^5.0.1",
       "style-loader": "^0.23.1",
       "tslint": "^5.20.1",
@@ -822,6 +825,13 @@ Lockfile:
     dependencies:
       "@babel/helper-plugin-utils" "^7.0.0"
       "@babel/plugin-transform-typescript" "^7.6.0"
+  
+  "@babel/runtime@^7.7.2":
+    version "7.7.2"
+    resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.2.tgz#111a78002a5c25fc8e3361bedc9529c696b85a6a"
+    integrity sha512-JONRbXbTXc9WQE2mAZd1p0Z3DZ/6vaQIkgYMSTP3KjRCyd7rCZCcfhCyX+YjwcKxcZ82UrxbRD358bpExNgrjw==
+    dependencies:
+      regenerator-runtime "^0.13.2"
   
   "@babel/template@^7.1.0", "@babel/template@^7.4.4":
     version "7.4.4"
@@ -1951,6 +1961,14 @@ Lockfile:
       safe-buffer "^5.0.1"
       sha.js "^2.4.8"
   
+  create-react-context@^0.2.3:
+    version "0.2.3"
+    resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.3.tgz#9ec140a6914a22ef04b8b09b7771de89567cb6f3"
+    integrity sha512-CQBmD0+QGgTaxDL3OX1IDXYqjkp2It4RIbcb99jS6AEg27Ga+a9G3JtK6SIu0HBwPLZlmwt9F7UwWA4Bn92Rag==
+    dependencies:
+      fbjs "^0.8.0"
+      gud "^1.0.0"
+  
   cross-spawn@6.0.5, cross-spawn@^6.0.0:
     version "6.0.5"
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
@@ -2587,7 +2605,7 @@ Lockfile:
     dependencies:
       websocket-driver ">=0.5.1"
   
-  fbjs@^0.8.1:
+  fbjs@^0.8.0, fbjs@^0.8.1:
     version "0.8.17"
     resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
     integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -2885,6 +2903,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.0.tgz#8d8fdc73977cb04104721cb53666c1ca64cd328b"
     integrity sha512-jpSvDPV4Cq/bgtpndIWbI5hmYxhQGHPC4d4cqBPb4DLniCfhJokdXhwhaDuLBGLQdvvRum/UiX6ECVIPvDXqdg==
   
+  gud@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
+    integrity sha512-zGEOVKFM5sVPPrYs7J5/hYEw2Pof8KCyOwyhG8sAF26mCAeUFAcYPu1mwB7hhpIP29zOIBaDqwuHdLp0jvZXjw==
+  
   handle-thing@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.0.tgz#0e039695ff50c93fc288557d696f3c1dc6776754"
@@ -2990,6 +3013,13 @@ Lockfile:
     version "2.5.5"
     resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
     integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
+  
+  hoist-non-react-statics@^3.3.1:
+    version "3.3.1"
+    resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#101685d3aff3b23ea213163f6e8e12f4f111e19f"
+    integrity sha512-wbg3bpgA/ZqWrZuMOeJi8+SKMhr7X9TesL/rXMjTzh0p0JUBo3II8DHboYbuIXWRlttrUFxwcu/5kygrCw8fJw==
+    dependencies:
+      react-is "^16.7.0"
   
   homedir-polyfill@^1.0.1:
     version "1.0.3"
@@ -3588,6 +3618,11 @@ Lockfile:
     integrity sha512-avPEb8P8EGnwXKClwsNUgryVjllcRqtMYa49NTsbQagYuT1DcXnl1915oxWjoyGrXR6zH/Y0Zc96xWsPcoDKeA==
     dependencies:
       invert-kv "^2.0.0"
+  
+  leaflet@^1.5.1:
+    version "1.6.0"
+    resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.6.0.tgz#aecbb044b949ec29469eeb31c77a88e2f448f308"
+    integrity sha512-CPkhyqWUKZKFJ6K8umN5/D2wrJ2+/8UIpXppY7QDnUZW5bZL5+SEI2J7GBpwh4LIupOKqbNSQXgqmrEJopHVNQ==
   
   less-loader@^5.0.0:
     version "5.0.0"
@@ -4525,7 +4560,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.5.8, prop-types@^15.6.2:
+  prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4669,6 +4704,11 @@ Lockfile:
       minimist "^1.2.0"
       strip-json-comments "~2.0.1"
   
+  react-display-name@^0.2.4:
+    version "0.2.4"
+    resolved "https://registry.yarnpkg.com/react-display-name/-/react-display-name-0.2.4.tgz#e2a670b81d79a2204335510c01246f4c92ff12cf"
+    integrity sha512-zvU6iouW+SWwHTyThwxGICjJYCMZFk/6r/+jmOdC7ntQoPlS/Pqb81MkxaMf2bHTSq9TN3K3zX2/ayMW/jCtyA==
+  
   react-dom@^16.8.6:
     version "16.8.6"
     resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
@@ -4696,10 +4736,56 @@ Lockfile:
       scriptjs "^2.5.8"
       warning "^3.0.0"
   
+  react-is@^16.7.0:
+    version "16.12.0"
+    resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
+    integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+  
   react-is@^16.8.1:
     version "16.8.6"
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
     integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
+  
+  react-leaflet-control@^2.1.1:
+    version "2.1.1"
+    resolved "https://registry.yarnpkg.com/react-leaflet-control/-/react-leaflet-control-2.1.1.tgz#ed90006c9d285872a2788fe15c11fc30ad14cdb0"
+    integrity sha512-3fx4uSRFtDaFNa1yq62DCxdc9kR3Lk4V7R0lHqbKfPTEIOvPR7VFvk3xzcSnSB/0LAYO8R96Pwcs1c6knyL/Hw==
+  
+  react-leaflet-location-picker@^1.4.1:
+    version "1.4.1"
+    resolved "https://registry.yarnpkg.com/react-leaflet-location-picker/-/react-leaflet-location-picker-1.4.1.tgz#367dabbd424312cb36241015e216514e2db80b7c"
+    integrity sha512-M1y3Yo3e2C0x+fvU1p9vVIdD3JZbHFtyYUUPbhQ/iiZOARYe01yw3UlbHO0EkwtbdQDIhSc8DeqDj7ArOk3J+A==
+    dependencies:
+      leaflet "^1.5.1"
+      react-leaflet "^2.4.0"
+      react-leaflet-control "^2.1.1"
+  
+  react-leaflet@^2.4.0:
+    version "2.6.0"
+    resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-2.6.0.tgz#517348b6c8588ce9f33137021900d826e542ac55"
+    integrity sha512-FezC/YA2dBmky997BIDaxQmtISGq6VGFAhJHGRr4NkByOg7jD9xrzoilmEG3pMYwwgxi7Pctg2YpWRq3fQbdxg==
+    dependencies:
+      "@babel/runtime" "^7.7.2"
+      fast-deep-equal "^2.0.1"
+      hoist-non-react-statics "^3.3.1"
+      warning "^4.0.3"
+  
+  react-location-picker@^1.5.0:
+    version "1.5.0"
+    resolved "https://registry.yarnpkg.com/react-location-picker/-/react-location-picker-1.5.0.tgz#42e0f90633401e1b21e49c62a5616be7ddd46d2c"
+    integrity sha512-gBbskwQu319pSjDehqaty+w6nMV9pXayqeaQmwnOvQtDG2TfVAJGta79VlLjQxmeKwsBjHlhkwJ7HW87IN/GKA==
+    dependencies:
+      prop-types "^15.6.1"
+      react-google-maps "^9.4.5"
+  
+  react-yandex-maps@^4.2.0:
+    version "4.2.0"
+    resolved "https://registry.yarnpkg.com/react-yandex-maps/-/react-yandex-maps-4.2.0.tgz#c438749856a3545a089c0cf77d11ff36d0105ae5"
+    integrity sha512-LWsy7yVn7HcZzxa8ILJJzSMvTQaeu06f4JBy+wo6G/Xt20aMQiobJCjMih5smi/87R+3DyZWgZ8UOtNo/JVpqQ==
+    dependencies:
+      create-react-context "^0.2.3"
+      prop-types "^15.7.2"
+      react-display-name "^0.2.4"
   
   react@^16.8.6:
     version "16.8.6"
@@ -4768,6 +4854,11 @@ Lockfile:
     version "0.11.1"
     resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
     integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
+  
+  regenerator-runtime@^0.13.2:
+    version "0.13.3"
+    resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
+    integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
   
   regenerator-transform@^0.14.0:
     version "0.14.0"
@@ -5808,6 +5899,13 @@ Lockfile:
     version "3.0.0"
     resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
     integrity sha1-MuU3fLVy3kqwR1O9+IIcAe1gW3w=
+    dependencies:
+      loose-envify "^1.0.0"
+  
+  warning@^4.0.3:
+    version "4.0.3"
+    resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
+    integrity sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==
     dependencies:
       loose-envify "^1.0.0"
   
