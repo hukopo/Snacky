@@ -11,9 +11,8 @@ export class Board extends React.Component<{}, BoardsState> {
     cards: [] as CardDto[]
   };
 
-  componentDidMount = async () => {
-    const cards = await this.loadCards();
-    this.setState({ cards: cards });
+  componentDidMount = () => {
+    setInterval(this.updateBoard, 5 * 1000);
   };
 
   loadCards = async (): Promise<CardDto[]> => {
@@ -25,6 +24,8 @@ export class Board extends React.Component<{}, BoardsState> {
     const data = await response.json();
     return data as CardDto[];
   };
+
+  updateBoard = async () => this.setState({ cards: await this.loadCards() });
 
   render() {
     return (
