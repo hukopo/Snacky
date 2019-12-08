@@ -1,5 +1,6 @@
 package com.Organizer.Snacky;
 
+import com.Organizer.Snacky.DBRepos.PlaceRepository;
 import com.Organizer.Snacky.DBRepos.UserRepository;
 import com.Organizer.Snacky.DbEnteiies.Card;
 import com.Organizer.Snacky.DbEnteiies.Place;
@@ -21,6 +22,8 @@ public class OnStartup implements InitializingBean {
     private CardService cardService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PlaceRepository placeRepository;
 
     @Override
     public void afterPropertiesSet() {
@@ -36,6 +39,9 @@ public class OnStartup implements InitializingBean {
         card1.place.name = "Место1";
         card1.place.longitude = 228f;
         card1.place.latitude = 1488f;
+        var place = placeRepository.saveAndFlush(card1.place);
+        card1.place = place;
+        card1.placeId = place.id;
         card1.userId = kartoshkin.id;
         card1.members = new HashSet<>();
 
@@ -48,11 +54,14 @@ public class OnStartup implements InitializingBean {
         card2.place.name = "Место2";
         card2.place.longitude = 1337f;
         card2.place.latitude = 1337f;
+        place = placeRepository.saveAndFlush(card2.place);
+        card2.place = place;
+        card2.placeId = place.id;
         card2.members = new HashSet<>();
         card2.description = "Описание2";
         //card2.user = kapustin;
         card2.userId = kapustin.id;
-        cardService.addCard(card1);
+        var card = cardService.addCard(card1);
         cardService.addCard(card2);
     }
 }

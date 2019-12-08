@@ -58,7 +58,7 @@ public class Card {
     @JoinColumn(name = "user_id", nullable = false, updatable = false, insertable = false)
     public User user;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST},fetch = FetchType.EAGER, targetEntity = Place.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Place.class)
     @JoinColumn(name = "place_id", nullable = true, updatable = false, insertable = false)
     public Place place;
 
