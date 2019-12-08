@@ -91,8 +91,10 @@ public class CardController extends BaseController {
         if (card.userId != userId && !user.role.equals(User.Role.Admin)) {
             return forbidden("ne twoe");
         }
+
         card.updateFromModel(cardModel);
         card.members.clear();
+        card.members.add(user);
         FillMembers(cardModel, card);
         card.tags.clear();
         FillTags(cardModel, card);

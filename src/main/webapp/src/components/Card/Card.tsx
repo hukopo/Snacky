@@ -3,6 +3,7 @@ import cn from "./Card.less";
 
 interface CardProps {
   card: CardDto;
+  onEditCard: (card: CardDto) => void;
 }
 
 export class Card extends React.Component<CardProps> {
@@ -11,12 +12,8 @@ export class Card extends React.Component<CardProps> {
     return (
       <div className={cn("card")}>
         <div className={cn("controls")}>
-          <div className={cn("control")} onClick={this.onEdit}>
-            🖊
-          </div>
-          <div className={cn("control")} onClick={this.onTrash}>
-            🗑️
-          </div>
+          <div className={cn("control")} onClick={this.onEdit}>🖊</div>
+          <div className={cn("control")} onClick={this.onTrash}>🗑️</div>
         </div>
         <div>owner: {card.creator.userName}</div>
         <div className={cn("header")}>title: {card.title}</div>
@@ -35,5 +32,7 @@ export class Card extends React.Component<CardProps> {
     await fetch(`/cards/${this.props.card.id}/delete`, { method: "DELETE" });
   };
 
-  onEdit = () => {};
+  onEdit = () => {
+      this.props.onEditCard(this.props.card);
+  }
 }
