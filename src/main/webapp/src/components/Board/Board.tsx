@@ -17,7 +17,7 @@ export class Board extends React.Component<{}, BoardsState> {
   };
 
   loadCards = async (): Promise<CardDto[]> => {
-    const response = await fetch("/cards/getAll");
+    const response = await fetch("/cards/getAll?skip=0&take=1000");
     console.log(`upload cards with code ${response.status}`);
     if (!response.ok) {
       throw new Error(`load cards fail with status ${response.status}`);

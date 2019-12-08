@@ -55,17 +55,23 @@ public class CardController extends BaseController {
 
 
     @GetMapping("/getAll")
-    ResponseEntity getAll() {
+    ResponseEntity getAll(int take, int skip) {
         var auth = getAuthentication();
         if (auth == null)
             return unauthorized("");
         var user = userRepository.findByUserName(auth.getName()).get();
         var cards = user.participantsCards;
         var cardsModels = new ArrayList<CardModel>();
+        var i = 0;
         for (var card : cards
         ) {
-            cardsModels.add(card.toCardModel());
+            if (i > skip + take)
+                break;
+            i++;
+            if (i > skip)
+                cardsModels.add(card.toCardModel());
         }
+
         return ok(cardsModels);
     }
 
