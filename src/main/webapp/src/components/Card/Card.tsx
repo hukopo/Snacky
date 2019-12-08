@@ -20,10 +20,16 @@ export class Card extends React.Component<CardProps> {
         <div>description: {card.description.content}</div>
         <div>members: {card.members.map(m => ` ${m.userName}`)}</div>
         <div className={cn("tags")}>tags: {card.tags.map(t => t.name)}</div>
-        <div>
-          период:
-          {card.startDate} - {card.endDate}
-        </div>
+        {card.startDate ? (
+          <div>
+            c: {card.startDate}
+          </div>
+        ) : null}
+        {card.endDate ? (
+          <div>
+            по: {card.endDate}
+           </div>
+         ) : null}
       </div>
     );
   }
