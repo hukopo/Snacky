@@ -72,6 +72,7 @@ public class Card {
 
     public CardModel toCardModel() {
         var cardModel =  new CardModel();
+        cardModel.id = id;
         cardModel.endDate = endDate;
         cardModel.title = title;
         cardModel.description.content = description;

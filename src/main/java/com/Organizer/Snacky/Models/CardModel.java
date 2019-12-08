@@ -19,6 +19,7 @@ public  class CardModel {
     public PlaceModel place;
     public Timestamp startDate;
     public Timestamp endDate;
+    public int id;
 
     public com.Organizer.Snacky.DbEnteiies.Card toCard(Integer userId) {
         return new com.Organizer.Snacky.DbEnteiies.Card(title, description.content, userId, startDate, endDate);
