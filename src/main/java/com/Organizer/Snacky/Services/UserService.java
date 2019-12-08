@@ -5,6 +5,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    public void addUser(String userName, String hash);
+    public void addUser(String userName, String hash, User.Role role);
     //Iterable<User> getUsersByLogin(String userName);
 }

@@ -35,7 +35,7 @@ public class RegistrationController {
             return "registrationPage.jsp";
         }
 
-        userService.addUser(userForm.userName, userForm.hash);
+        userService.addUser(userForm.userName, userForm.hash, User.Role.User);
 
         securityService.autoLogin(userForm.userName, userForm.hash);
 
